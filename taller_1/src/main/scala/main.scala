@@ -3,7 +3,6 @@
   @author Paul Weiss
 */
 
-// Máximo Usando Recursión Lineal
 /* ===MÁXIMO USANDO RECURSIÓN LINEAL===
   Para este caso, nos conviene ordenar la lista de mayor a menor para poder retornar el mayor elemento usando l.head
 */
@@ -17,5 +16,8 @@ def maxLin(l: List[Int]): Int = {
   return l.head //Se retorna el mayor elemento
 }
 
-// Máximo Usando Iteraciones
-def maxIter(l: List[Int]): Int = {}
+/* ===MÁXIMO USANDO RECURSIÓN LINEAL===
+*/
+def maxIter(l: List[Int]): Int = {
+
+}
