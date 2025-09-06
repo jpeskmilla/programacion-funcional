@@ -17,7 +17,17 @@ def maxLin(l: List[Int]): Int = {
 }
 
 /* ===MÁXIMO USANDO RECURSIÓN LINEAL===
+  Para este caso, se define una función recursiva que toma la lista restante y el mayor elemento actual.
+  Se calcula el nuevo mayor elemento y se llama a la función recursivamente con la lista restante y el nuevo mayor elemento.
+  Se retorna el mayor elemento.
 */
-def maxIter(l: List[Int]): Int = {
-
+def maxIt(l: List[Int]): Int = {
+  def loop(resto: List[Int], maximoActual: Int): Int = { // Se define una función recursiva que toma la lista restante y el mayor elemento actual
+    if (resto.isEmpty) maximoActual // Si la lista está vacía, se retorna el mayor elemento actual
+    else {
+      val nuevoMaximo = if (resto.head > maximoActual) resto.head else maximoActual // Se calcula el nuevo mayor elemento
+      loop(resto.tail, nuevoMaximo) // Se llama a la función recursivamente con la lista restante y el nuevo mayor elemento
+    }
+  }
+  loop(l.tail, l.head) // Se llama a la función recursivamente con la lista y el primer elemento como mayor elemento inicial
 }
