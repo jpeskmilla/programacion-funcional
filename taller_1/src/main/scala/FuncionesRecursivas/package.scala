@@ -33,7 +33,30 @@ def maxIt(l: List[Int]): Int = {
   loop(l.tail, l.head) // Se llama a la función recursivamente con la lista y el primer elemento como mayor elemento inicial
 }
 
+/*
+  ===MOVIMIENTOS TORRES DE HANOI===
+  Para calcular los movimientos usamos la siguiente lógica, donde T1 es el poste de origen, T2 es el poste 
+  auxiliar y T3 es el poste destino:
+  - Si hay un solo disco, se mueve directamente de T1 a T3 (1 movimiento = 2^1-1).
+  - Si hay dos dicos, se mueve el disco pequeño de T1 a T2, luego el disco grande de T1 a T3, 
+  y finalmente el disco pequeño de T2 a T3 (3 movimientos = 2^2-1).
+  - Si seguimos ese patron, tendremos la "ecuacion" 2^n-1, donde n es el numero de discos.
+  */
+def movsTorresHanoi(n: Int): BigInt = {
+  if (n == 1) 1 // Caso base: si hay un solo disco, se necesita un solo movimiento
+  else 2 * movsTorresHanoi(n - 1) + 1 // Se mueven n-1 discos al poste auxiliar, se mueve el disco más grande al poste destino, y se mueven los n-1 discos del poste auxiliar al poste destino
+}
 
-def movsTorresHanoi(n: Int): BigInt = {return 0}
-
-def TorresHanoi(n:Int, t1:Int, t2:Int, t3:Int): List[(Int, Int)] = {return null}
+/* ===TORRES DE HANOI===
+  La función retorna una lista de tuplas, donde cada tupla representa un movimiento de un disco 
+  desde un poste origen a un poste destino.
+*/
+def torresHanoi(n: Int, t1: Int, t2: Int, t3: Int): List[(Int, Int)] = {
+  if (n == 1) List((t1, t3)) // Caso base: si hay un solo disco, se mueve directamente de T1 a T3
+  else {
+    val parte1 = torresHanoi(n - 1, t1, t3, t2) // Se mueven n-1 discos del poste origen al poste auxiliar
+    val moverGrande = List((t1, t3)) // Se mueve el disco más grande del poste origen al poste destino
+    val parte2 = torresHanoi(n - 1, t2, t1, t3) // Se mueven n-1 discos del poste auxiliar al poste destino
+    parte1 ++ moverGrande ++ parte2 // Se concatenan las listas de movimientos y se retorna la lista completa
+  }
+}
